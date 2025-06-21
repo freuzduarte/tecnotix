@@ -1,0 +1,23 @@
+---
+// src/components/Footer.astro
+---
+<footer>
+  <div class="footer-container">
+    <p>&copy; {new Date().getFullYear()} Tecnotix Solutions. Todos los derechos reservados.</p>
+
+    <nav aria-label="Enlaces legales">
+      <ul>
+        <li><a href="/aviso-legal" title="Ver aviso legal">Aviso Legal</a></li>
+        <li><a href="/politica-privacidad" title="Ver política de privacidad">Política de Privacidad</a></li>
+        <li><a href="/contacto" title="Contáctanos">Contacto</a></li>
+      </ul>
+    </nav>
+
+    <div class="social-media">
+      <a href="https://www.instagram.com/tecnotix" target="_blank" rel="noopener" aria-label="Instagram de Tecnotix">
+        <img src="/assets/instagram.svg" alt="Instagram" width="24" height="24" />
+      </a>
+      <!-- Puedes añadir más redes aquí -->
+    </div>
+  </div>
+</footer>
