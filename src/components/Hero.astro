@@ -1,0 +1,348 @@
+---
+---
+
+<section id="inicio" class="relative min-h-screen flex items-center justify-center overflow-hidden pt-20">
+  <!-- Animated Background -->
+  <div class="absolute inset-0 bg-gradient-to-br from-black via-gray-900 to-black">
+    <div class="absolute inset-0 bg-gradient-to-r from-primary/10 via-transparent to-primary/5"></div>
+  </div>
+  
+  <!-- Floating Elements -->
+  <div class="floating-elements absolute inset-0 overflow-hidden">
+    <div class="floating-circle absolute top-20 left-10 w-32 h-32 bg-primary/20 rounded-full blur-xl"></div>
+    <div class="floating-circle absolute bottom-20 right-10 w-48 h-48 bg-primary/10 rounded-full blur-2xl"></div>
+    <div class="floating-circle absolute top-1/2 left-1/4 w-6 h-6 bg-primary/40 rounded-full"></div>
+    <div class="floating-circle absolute top-1/3 right-1/3 w-4 h-4 bg-primary/30 rounded-full"></div>
+  </div>
+  
+  <!-- Tech Assembly Animation -->
+  <div class="tech-assembly absolute inset-0 pointer-events-none opacity-10">
+    <svg class="assembly-svg w-full h-full" viewBox="0 0 1200 800">
+      <!-- Phone parts -->
+      <g class="phone-assembly">
+        <rect class="phone-screen" x="100" y="300" width="120" height="200" rx="15" fill="#25A1B0" />
+        <rect class="phone-body" x="95" y="295" width="130" height="210" rx="20" fill="none" stroke="#25A1B0" stroke-width="2" />
+        <circle class="phone-button" cx="160" cy="520" r="8" fill="#25A1B0" />
+      </g>
+      
+      <!-- Web elements -->
+      <g class="web-assembly">
+        <rect class="web-browser" x="900" y="200" width="200" height="120" rx="8" fill="none" stroke="#25A1B0" stroke-width="2" />
+        <rect class="web-header" x="900" y="200" width="200" height="20" rx="8" fill="#25A1B0" opacity="0.5" />
+        <circle cx="915" cy="210" r="3" fill="#25A1B0" />
+        <circle cx="930" cy="210" r="3" fill="#25A1B0" />
+        <circle cx="945" cy="210" r="3" fill="#25A1B0" />
+      </g>
+      
+      <!-- Computer parts -->
+      <g class="computer-assembly">
+        <rect class="monitor" x="500" y="100" width="150" height="90" rx="8" fill="none" stroke="#25A1B0" stroke-width="2" />
+        <rect class="monitor-stand" x="565" y="190" width="20" height="15" fill="#25A1B0" />
+        <rect class="keyboard" x="520" y="220" width="110" height="30" rx="4" fill="none" stroke="#25A1B0" stroke-width="2" />
+      </g>
+    </svg>
+  </div>
+  
+  <div class="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+    <div class="max-w-7xl mx-auto">
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+        <!-- Content Column -->
+        <div class="hero-content">
+          <h1 class="hero-title text-4xl md:text-6xl lg:text-7xl font-bold text-white mb-6 leading-tight">
+            Soluciones <span class="text-primary glow-text">Tecnológicas</span><br>
+            <span class="text-3xl md:text-5xl lg:text-6xl text-gray-300">del Futuro</span>
+          </h1>
+          <p class="hero-subtitle text-lg md:text-xl text-gray-300 mb-8 leading-relaxed">
+            Transformamos ideas en realidad digital. Especialistas en reparación, desarrollo y consultoría tecnológica 
+            para empresas que buscan innovar y crecer.
+          </p>
+          <div class="hero-cta flex flex-col sm:flex-row gap-4">
+            <a href="#servicios" class="cta-primary group">
+              <span>Explorar Servicios</span>
+              <svg class="ml-3 w-5 h-5 group-hover:translate-x-1 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3" />
+              </svg>
+            </a>
+            <a href="#contacto" class="cta-secondary group">
+              <span>Comenzar Proyecto</span>
+              <svg class="ml-3 w-5 h-5 group-hover:scale-110 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z" />
+              </svg>
+            </a>
+          </div>
+        </div>
+        
+        <!-- Image Column -->
+        <div class="hero-image">
+          <div class="relative">
+            <!-- Main Device Display -->
+            <div class="device-showcase">
+              <div class="floating-device main-device">
+                <div class="device-screen">
+                  <div class="screen-content">
+                    <div class="screen-header"></div>
+                    <div class="screen-body">
+                      <div class="code-line"></div>
+                      <div class="code-line short"></div>
+                      <div class="code-line"></div>
+                      <div class="code-line medium"></div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              
+              <!-- Floating Elements -->
+              <div class="floating-device secondary-device">
+                <svg class="device-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                  <rect x="2" y="3" width="20" height="14" rx="2" ry="2"/>
+                  <line x1="8" y1="21" x2="16" y2="21"/>
+                  <line x1="12" y1="17" x2="12" y2="21"/>
+                </svg>
+              </div>
+              
+              <div class="floating-device tertiary-device">
+                <svg class="device-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                  <path d="M2.062 12.348a1 1 0 0 1 0-.696 10.75 10.75 0 0 1 19.876 0 1 1 0 0 1 0 .696 10.75 10.75 0 0 1-19.876 0"/>
+                  <circle cx="12" cy="12" r="3"/>
+                </svg>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .glow-text {
+    text-shadow: 0 0 20px rgba(37, 161, 176, 0.5);
+  }
+  
+  .floating-circle {
+    animation: float 6s ease-in-out infinite;
+  }
+  
+  .floating-circle:nth-child(2) {
+    animation-delay: -2s;
+  }
+  
+  .floating-circle:nth-child(3) {
+    animation-delay: -4s;
+  }
+  
+  .floating-circle:nth-child(4) {
+    animation-delay: -1s;
+  }
+  
+  @keyframes float {
+    0%, 100% { transform: translateY(0px) rotate(0deg); }
+    33% { transform: translateY(-20px) rotate(120deg); }
+    66% { transform: translateY(10px) rotate(240deg); }
+  }
+  
+  .device-showcase {
+    position: relative;
+    height: 500px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .floating-device {
+    position: absolute;
+    animation: float-device 4s ease-in-out infinite;
+  }
+  
+  .main-device {
+    z-index: 3;
+  }
+  
+  .secondary-device {
+    top: 20%;
+    right: 10%;
+    z-index: 2;
+    animation-delay: -1s;
+  }
+  
+  .tertiary-device {
+    bottom: 20%;
+    left: 10%;
+    z-index: 1;
+    animation-delay: -2s;
+  }
+  
+  .device-screen {
+    width: 280px;
+    height: 400px;
+    background: linear-gradient(135deg, #1a1a1a, #2a2a2a);
+    border-radius: 25px;
+    padding: 20px;
+    box-shadow: 
+      0 25px 50px rgba(0, 0, 0, 0.5),
+      0 0 0 1px rgba(37, 161, 176, 0.3),
+      inset 0 1px 0 rgba(255, 255, 255, 0.1);
+    position: relative;
+    overflow: hidden;
+  }
+  
+  .device-screen::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(135deg, rgba(37, 161, 176, 0.1), transparent);
+    border-radius: 25px;
+  }
+  
+  .screen-content {
+    background: #000;
+    border-radius: 15px;
+    height: 100%;
+    padding: 15px;
+    position: relative;
+    z-index: 1;
+  }
+  
+  .screen-header {
+    height: 40px;
+    background: linear-gradient(90deg, #25A1B0, #34B4C3);
+    border-radius: 8px;
+    margin-bottom: 15px;
+    position: relative;
+  }
+  
+  .screen-header::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 15px;
+    transform: translateY(-50%);
+    width: 8px;
+    height: 8px;
+    background: white;
+    border-radius: 50%;
+    box-shadow: 15px 0 white, 30px 0 white;
+  }
+  
+  .screen-body {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+  
+  .code-line {
+    height: 12px;
+    background: linear-gradient(90deg, #25A1B0, transparent);
+    border-radius: 6px;
+    animation: code-glow 2s ease-in-out infinite alternate;
+  }
+  
+  .code-line.short {
+    width: 60%;
+    animation-delay: -0.5s;
+  }
+  
+  .code-line.medium {
+    width: 80%;
+    animation-delay: -1s;
+  }
+  
+  @keyframes code-glow {
+    from { opacity: 0.6; }
+    to { opacity: 1; }
+  }
+  
+  .device-icon {
+    width: 60px;
+    height: 60px;
+    color: #25A1B0;
+    stroke-width: 1.5;
+    filter: drop-shadow(0 10px 20px rgba(37, 161, 176, 0.3));
+    background: rgba(37, 161, 176, 0.1);
+    border-radius: 15px;
+    padding: 15px;
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(37, 161, 176, 0.2);
+  }
+  
+  @keyframes float-device {
+    0%, 100% { transform: translateY(0px) rotate(0deg); }
+    50% { transform: translateY(-15px) rotate(2deg); }
+  }
+  
+  .cta-primary {
+    display: inline-flex;
+    align-items: center;
+    padding: 16px 32px;
+    background: linear-gradient(135deg, #25A1B0, #34B4C3);
+    color: white;
+    font-weight: 600;
+    border-radius: 12px;
+    text-decoration: none;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    box-shadow: 0 10px 25px rgba(37, 161, 176, 0.3);
+    position: relative;
+    overflow: hidden;
+  }
+  
+  .cta-primary::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+    transition: left 0.5s;
+  }
+  
+  .cta-primary:hover::before {
+    left: 100%;
+  }
+  
+  .cta-primary:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 15px 35px rgba(37, 161, 176, 0.4);
+  }
+  
+  .cta-secondary {
+    display: inline-flex;
+    align-items: center;
+    padding: 16px 32px;
+    border: 2px solid #25A1B0;
+    color: #25A1B0;
+    font-weight: 600;
+    border-radius: 12px;
+    text-decoration: none;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    background: rgba(37, 161, 176, 0.05);
+    backdrop-filter: blur(10px);
+  }
+  
+  .cta-secondary:hover {
+    background: #25A1B0;
+    color: white;
+    transform: translateY(-2px);
+    box-shadow: 0 10px 25px rgba(37, 161, 176, 0.3);
+  }
+  
+  @media (max-width: 1024px) {
+    .device-showcase {
+      height: 400px;
+    }
+    
+    .device-screen {
+      width: 220px;
+      height: 320px;
+    }
+    
+    .device-icon {
+      width: 50px;
+      height: 50px;
+      padding: 12px;
+    }
+  }
+</style>

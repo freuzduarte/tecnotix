@@ -1,18 +1,181 @@
 ---
-// src/components/Header.astro
----
-<header>
-  <div class="logo">
-    <a href="/" aria-label="Inicio Tecnotix">
-      <img src="/assets/logo-tecnotix.svg" alt="Logo de Tecnotix Solutions" width="150" height="auto" />
-    </a>
-  </div>
 
-  <nav aria-label="Menú principal">
-    <ul>
-      <li><a href="/" title="Ir al inicio">Inicio</a></li>
-      <li><a href="/servicios" title="Ver nuestros servicios">Servicios</a></li>
-      <li><a href="/contacto" title="Contáctanos">Contacto</a></li>
-    </ul>
+---
+
+<header
+  class="fixed w-full top-0 z-50 bg-black/95 backdrop-blur-sm border-b border-gray-800"
+>
+  <nav class="container mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="flex justify-between items-center h-20">
+      <div class="flex items-center">
+        <a href="#inicio" class="flex items-center space-x-3">
+          <div class="logo-container">
+            <svg
+              id="logo-animated"
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="837.0139770507812 837.0139770507812 1325.97607421875 1325.97607421875"
+              class="w-12 h-12"
+              fill-rule="evenodd"
+              clip-rule="evenodd"
+              stroke-linejoin="round"
+              stroke-miterlimit="2"
+            >
+              <path
+                id="logo-t"
+                d="M2162.99,837.014L2041.99,1079.01L1611.99,1079.01L1420,1462.99L1635,1892.99L1500,2162.99L1150,1462.99L1341.99,1079.01L958.014,1079.01L837.014,837.014L2162.99,837.014Z"
+                fill="#FFFFFF"></path>
+              <path
+                id="logo-polygon"
+                d="M1713.5,1735.99L1578.5,1465.99L1701.99,1219.01L1971.99,1219.01L1713.5,1735.99Z"
+                fill="#25A1B0"></path>
+            </svg>
+          </div>
+          <div class="text-2xl font-bold text-white">
+            Tecnotix <span class="text-primary">Solutions</span>
+          </div>
+        </a>
+      </div>
+
+      <div class="hidden md:block">
+        <div class="ml-10 flex items-center space-x-8">
+          <a href="#inicio" class="nav-link">Inicio</a>
+          <a href="#servicios" class="nav-link">Servicios</a>
+          <a href="#nosotros" class="nav-link">Nosotros</a>
+          <a href="#contacto" class="nav-link">Contacto</a>
+        </div>
+      </div>
+
+      <div class="md:hidden">
+        <button
+          type="button"
+          class="mobile-menu-button text-white hover:text-primary focus:outline-none"
+        >
+          <svg
+            class="h-6 w-6"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke="currentColor"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              d="M4 6h16M4 12h16M4 18h16"></path>
+          </svg>
+        </button>
+      </div>
+    </div>
+
+    <!-- Mobile menu -->
+    <div class="md:hidden mobile-menu hidden">
+      <div
+        class="px-2 pt-2 pb-3 space-y-1 bg-black/95 border-t border-gray-800"
+      >
+        <a
+          href="#inicio"
+          class="block px-3 py-2 text-white hover:text-primary transition-colors duration-300"
+          >Inicio</a
+        >
+        <a
+          href="#servicios"
+          class="block px-3 py-2 text-white hover:text-primary transition-colors duration-300"
+          >Servicios</a
+        >
+        <a
+          href="#nosotros"
+          class="block px-3 py-2 text-white hover:text-primary transition-colors duration-300"
+          >Nosotros</a
+        >
+        <a
+          href="#contacto"
+          class="block px-3 py-2 text-white hover:text-primary transition-colors duration-300"
+          >Contacto</a
+        >
+      </div>
+    </div>
   </nav>
 </header>
+
+<style>
+  .logo-container {
+    position: relative;
+  }
+
+  .logo-container::before {
+    content: "";
+    position: absolute;
+    top: -2px;
+    left: -2px;
+    right: -2px;
+    bottom: -2px;
+    background: linear-gradient(45deg, #25a1b0, #34b4c3, #25a1b0);
+    border-radius: 50%;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    z-index: -1;
+    filter: blur(4px);
+  }
+
+  .logo-container:hover::before {
+    opacity: 0.6;
+    animation: glow-pulse 2s ease-in-out infinite alternate;
+  }
+
+  @keyframes glow-pulse {
+    from {
+      filter: blur(4px);
+    }
+    to {
+      filter: blur(8px);
+    }
+  }
+
+  .nav-link {
+    position: relative;
+    color: white;
+    font-weight: 500;
+    padding: 12px 20px;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    border-radius: 8px;
+  }
+
+  .nav-link::before {
+    content: "";
+    position: absolute;
+    bottom: 8px;
+    left: 50%;
+    width: 0;
+    height: 2px;
+    background: linear-gradient(90deg, #25a1b0, #34b4c3);
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    transform: translateX(-50%);
+  }
+
+  .nav-link:hover {
+    color: #25a1b0;
+    background: rgba(37, 161, 176, 0.1);
+  }
+
+  .nav-link:hover::before {
+    width: 60%;
+  }
+</style>
+
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+    const mobileMenuButton = document.querySelector(".mobile-menu-button");
+    const mobileMenu = document.querySelector(".mobile-menu");
+
+    mobileMenuButton?.addEventListener("click", function () {
+      mobileMenu?.classList.toggle("hidden");
+    });
+
+    // Close mobile menu when clicking on a link
+    const mobileLinks = document.querySelectorAll(".mobile-menu a");
+    mobileLinks.forEach((link) => {
+      link.addEventListener("click", function () {
+        mobileMenu?.classList.add("hidden");
+      });
+    });
+  });
+</script>

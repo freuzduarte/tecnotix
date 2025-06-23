@@ -1,0 +1,447 @@
+---
+const featuredServices = [
+  {
+    title: "Reparación de Dispositivos",
+    description: "Servicio técnico especializado para notebooks, tablets y smartphones. Diagnóstico avanzado, reparaciones precisas y repuestos de calidad garantizada.",
+    icon: "repair",
+    image: "https://images.pexels.com/photos/4792728/pexels-photo-4792728.jpeg?auto=compress&cs=tinysrgb&w=800",
+    priority: "🥇",
+    hasParallax: true
+  },
+  {
+    title: "Cámaras de Seguridad",
+    description: "Sistemas CCTV inteligentes con tecnología de última generación. Instalación profesional, monitoreo remoto y análisis de video avanzado.",
+    icon: "security",
+    image: "https://images.pexels.com/photos/430208/pexels-photo-430208.jpeg?auto=compress&cs=tinysrgb&w=800",
+    priority: "🥈",
+    hasParallax: false
+  },
+  {
+    title: "Desarrollo Web",
+    description: "Sitios web modernos y aplicaciones personalizadas. Diseño responsive, optimización SEO y experiencias digitales que convierten visitantes en clientes.",
+    icon: "web",
+    image: "https://images.pexels.com/photos/196644/pexels-photo-196644.jpeg?auto=compress&cs=tinysrgb&w=800",
+    priority: "🥉",
+    hasParallax: false
+  }
+];
+
+const otherServices = [
+  {
+    title: "Accesorios Tecnológicos",
+    description: "Audífonos, cargadores, soportes y gadgets de última generación.",
+    icon: "🎧"
+  },
+  {
+    title: "Asistencia Técnica",
+    description: "Soporte integral para redes, software y mantenimiento preventivo.",
+    icon: "🛠️"
+  },
+  {
+    title: "Consultoría Informática",
+    description: "Programación a medida y automatización de procesos empresariales.",
+    icon: "💡"
+  },
+  {
+    title: "Equipos y Periféricos",
+    description: "Reparación e instalación de impresoras, routers y monitores.",
+    icon: "🖨️"
+  },
+  {
+    title: "Servicios de Impresión",
+    description: "Impresión, escaneo y copias con calidad profesional.",
+    icon: "📄"
+  }
+];
+---
+
+<section id="servicios" class="py-20 bg-gradient-to-b from-gray-50 to-white relative overflow-hidden">
+  <!-- Background Pattern -->
+  <div class="absolute inset-0 opacity-5">
+    <svg width="100%" height="100%" xmlns="http://www.w3.org/2000/svg">
+      <defs>
+        <pattern id="grid" width="40" height="40" patternUnits="userSpaceOnUse">
+          <path d="M 40 0 L 0 0 0 40" fill="none" stroke="#25A1B0" stroke-width="1"/>
+        </pattern>
+      </defs>
+      <rect width="100%" height="100%" fill="url(#grid)" />
+    </svg>
+  </div>
+  
+  <div class="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+    <!-- Section Header -->
+    <div class="max-w-4xl mx-auto text-center mb-20 section-fade">
+      <h2 class="text-4xl md:text-5xl font-bold text-secondary mb-6">
+        Servicios <span class="text-primary">Destacados</span>
+      </h2>
+      <p class="text-xl text-gray-600 leading-relaxed">
+        Soluciones tecnológicas integrales diseñadas para impulsar tu negocio hacia el futuro digital
+      </p>
+    </div>
+    
+    <!-- Featured Services -->
+    <div class="featured-services mb-24 space-y-20">
+      {featuredServices.map((service, index) => (
+        <div class="featured-service-container">
+          <div class={`featured-service-card shadow-box ${index % 2 === 0 ? 'lg:flex-row' : 'lg:flex-row-reverse'}`}>
+            <!-- Content -->
+            <div class="service-content flex-1">
+              <div class="flex items-center mb-6">
+                <div class="priority-badge">{service.priority}</div>
+                <h3 class="service-title">{service.title}</h3>
+              </div>
+              <p class="service-description">{service.description}</p>
+              <div class="service-features">
+                <div class="feature-item">
+                  <svg class="feature-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                  </svg>
+                  <span>Garantía extendida</span>
+                </div>
+                <div class="feature-item">
+                  <svg class="feature-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+                  </svg>
+                  <span>Servicio 24/7</span>
+                </div>
+                <div class="feature-item">
+                  <svg class="feature-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                  </svg>
+                  <span>Calidad certificada</span>
+                </div>
+              </div>
+              <a href="#contacto" class="service-cta">
+                Solicitar Servicio
+                <svg class="ml-2 w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3" />
+                </svg>
+              </a>
+            </div>
+            
+            <!-- Image -->
+            <div class="service-image-container flex-1">
+              <div class={`service-image ${service.hasParallax ? 'parallax-image' : ''}`} data-bg={service.image}>
+                <div class="image-overlay">
+                  <div class="floating-device">
+                    {service.icon === 'repair' && (
+                      <svg class="device-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                        <rect x="2" y="3" width="20" height="14" rx="2" ry="2"/>
+                        <line x1="8" y1="21" x2="16" y2="21"/>
+                        <line x1="12" y1="17" x2="12" y2="21"/>
+                      </svg>
+                    )}
+                    {service.icon === 'security' && (
+                      <svg class="device-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                        <path d="M2.062 12.348a1 1 0 0 1 0-.696 10.75 10.75 0 0 1 19.876 0 1 1 0 0 1 0 .696 10.75 10.75 0 0 1-19.876 0"/>
+                        <circle cx="12" cy="12" r="3"/>
+                      </svg>
+                    )}
+                    {service.icon === 'web' && (
+                      <svg class="device-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                        <circle cx="12" cy="12" r="10"/>
+                        <line x1="2" y1="12" x2="22" y2="12"/>
+                        <path d="m12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/>
+                      </svg>
+                    )}
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      ))}
+    </div>
+    
+    <!-- Other Services -->
+    <div class="other-services section-fade">
+      <div class="text-center mb-16">
+        <h3 class="text-3xl md:text-4xl font-bold text-secondary mb-4">
+          Servicios <span class="text-primary">Adicionales</span>
+        </h3>
+        <p class="text-lg text-gray-600">
+          Soluciones complementarias para cubrir todas tus necesidades tecnológicas
+        </p>
+      </div>
+      
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        {otherServices.map((service) => (
+          <div class="other-service-card shadow-box">
+            <div class="service-icon-container">
+              <div class="service-icon-bg"></div>
+              <div class="service-icon">{service.icon}</div>
+            </div>
+            <h4 class="service-card-title">{service.title}</h4>
+            <p class="service-card-description">{service.description}</p>
+            <a href="#contacto" class="service-card-link">
+              Consultar
+              <svg class="ml-1 w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+              </svg>
+            </a>
+          </div>
+        ))}
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .shadow-box {
+    background: white;
+    border-radius: 2rem;
+    box-shadow: 
+      0 25px 50px rgba(0, 0, 0, 0.15),
+      0 10px 25px rgba(37, 161, 176, 0.1),
+      inset 0 1px 0 rgba(255, 255, 255, 0.8);
+    border: 1px solid rgba(37, 161, 176, 0.1);
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    position: relative;
+    overflow: hidden;
+  }
+  
+  .shadow-box::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 4px;
+    background: linear-gradient(90deg, #25A1B0, #34B4C3);
+    transform: scaleX(0);
+    transition: transform 0.4s ease;
+  }
+  
+  .shadow-box:hover::before {
+    transform: scaleX(1);
+  }
+  
+  .shadow-box:hover {
+    transform: translateY(-8px);
+    box-shadow: 
+      0 35px 70px rgba(0, 0, 0, 0.2),
+      0 15px 35px rgba(37, 161, 176, 0.15),
+      inset 0 1px 0 rgba(255, 255, 255, 0.8);
+  }
+  
+  .featured-service-container {
+    opacity: 0;
+    transform: translateY(50px);
+  }
+  
+  .featured-service-card {
+    display: flex;
+    flex-direction: column;
+    gap: 3rem;
+    padding: 3rem;
+    align-items: center;
+  }
+  
+  @media (min-width: 1024px) {
+    .featured-service-card {
+      flex-direction: row;
+      align-items: stretch;
+    }
+  }
+  
+  .service-content {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+  
+  .priority-badge {
+    font-size: 2rem;
+    margin-right: 1rem;
+    filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.1));
+  }
+  
+  .service-title {
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: #000;
+    margin: 0;
+    line-height: 1.2;
+  }
+  
+  .service-description {
+    font-size: 1.25rem;
+    color: #6b7280;
+    line-height: 1.7;
+    margin: 1.5rem 0 2rem 0;
+  }
+  
+  .service-features {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    margin-bottom: 2rem;
+  }
+  
+  .feature-item {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    color: #25A1B0;
+    font-weight: 500;
+    padding: 0.5rem 0;
+  }
+  
+  .feature-icon {
+    width: 1.25rem;
+    height: 1.25rem;
+    flex-shrink: 0;
+  }
+  
+  .service-cta {
+    display: inline-flex;
+    align-items: center;
+    padding: 1rem 2rem;
+    background: linear-gradient(135deg, #25A1B0, #34B4C3);
+    color: white;
+    font-weight: 600;
+    border-radius: 0.75rem;
+    text-decoration: none;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    box-shadow: 0 10px 25px rgba(37, 161, 176, 0.2);
+    align-self: flex-start;
+  }
+  
+  .service-cta:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 15px 35px rgba(37, 161, 176, 0.3);
+  }
+  
+  .service-image-container {
+    min-height: 400px;
+    position: relative;
+    border-radius: 1.5rem;
+    overflow: hidden;
+  }
+  
+  .service-image {
+    width: 100%;
+    height: 100%;
+    background-size: cover;
+    background-position: center;
+    position: relative;
+    transition: transform 0.3s ease;
+  }
+  
+  .service-image:hover {
+    transform: scale(1.02);
+  }
+  
+  .parallax-image {
+    background-attachment: fixed;
+  }
+  
+  @media (max-width: 768px) {
+    .parallax-image {
+      background-attachment: scroll;
+    }
+  }
+  
+  .image-overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(135deg, rgba(37, 161, 176, 0.8), rgba(52, 180, 195, 0.6));
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .floating-device {
+    animation: float-device 3s ease-in-out infinite;
+  }
+  
+  .device-icon {
+    width: 4rem;
+    height: 4rem;
+    color: white;
+    stroke-width: 1.5;
+    filter: drop-shadow(0 10px 20px rgba(0, 0, 0, 0.3));
+  }
+  
+  @keyframes float-device {
+    0%, 100% { transform: translateY(0px) rotate(0deg); }
+    50% { transform: translateY(-10px) rotate(5deg); }
+  }
+  
+  .other-service-card {
+    padding: 2rem;
+    position: relative;
+  }
+  
+  .service-icon-container {
+    position: relative;
+    width: 4rem;
+    height: 4rem;
+    margin-bottom: 1.5rem;
+  }
+  
+  .service-icon-bg {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(135deg, rgba(37, 161, 176, 0.1), rgba(52, 180, 195, 0.05));
+    border-radius: 1rem;
+    transition: all 0.3s ease;
+  }
+  
+  .other-service-card:hover .service-icon-bg {
+    background: linear-gradient(135deg, rgba(37, 161, 176, 0.2), rgba(52, 180, 195, 0.1));
+    transform: rotate(5deg) scale(1.1);
+  }
+  
+  .service-icon {
+    position: relative;
+    z-index: 1;
+    font-size: 2rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+  }
+  
+  .service-card-title {
+    font-size: 1.25rem;
+    font-weight: 600;
+    color: #000;
+    margin-bottom: 0.75rem;
+  }
+  
+  .service-card-description {
+    color: #6b7280;
+    line-height: 1.6;
+    margin-bottom: 1.5rem;
+  }
+  
+  .service-card-link {
+    display: inline-flex;
+    align-items: center;
+    color: #25A1B0;
+    font-weight: 500;
+    text-decoration: none;
+    transition: all 0.3s ease;
+  }
+  
+  .service-card-link:hover {
+    color: #1A7A86;
+    transform: translateX(4px);
+  }
+  
+  @media (max-width: 1024px) {
+    .service-title {
+      font-size: 2rem;
+    }
+    
+    .service-description {
+      font-size: 1.1rem;
+    }
+    
+    .featured-service-card {
+      padding: 2rem;
+      gap: 2rem;
+    }
+  }
+</style>

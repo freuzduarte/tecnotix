@@ -1,66 +1,20 @@
 ---
-import Layout from "../layouts/Layout.astro"
+import Layout from "../layouts/Layout.astro";
+
+import Hero from "../components/Hero.astro";
+
+import About from "../components/About.astro";
+import Contact from "../components/Contact.astro";
+import Header from "../components/base/Header.astro";
+import Services from "../components/services/Services.astro";
+import Footer from "../components/base/Footer.astro";
 ---
 
-<Layout>
-<section class="bg-red-500 h-screen">
-  <h1>GSAP</h1>
-</section>
-
-<section class="bg-green-500 h-screen">
-  <h1>GSAP</h1>
-</section>
-
-<section class="bg-blue-500 h-screen">
-  <h1>GSAP</h1>
-</section>
-
-<section class="bg-yellow-500 h-screen">
-  <h1>GSAP</h1>
-</section>
+<Layout title="Tecnotix Solutions - Servicios Tecnológicos Integrales">
+  <Header />
+  <Hero />
+  <Services />
+  <About />
+  <Contact />
+  <Footer />
 </Layout>
-
-<style>
-  html,
-  body {
-    height: 300vh;
-    overscroll-behavior: none;
-    overflow-x: hidden;
-    scroll-behavior: smooth;
-    color: white;
-    background-color: black;
-    font-family: 'Inter', sans-serif;
-    margin: 0;
-    width: 100%;
-    height: 100%;
-    padding: 0;
-  }
-</style>
-
-<script>
-  import gsap from 'gsap'
-  import { ScrollTrigger } from 'gsap/ScrollTrigger'
-  gsap.registerPlugin(ScrollTrigger)
-  
-  const tl = gsap.timeline({
-    scrollTrigger: {
-      trigger: 'section',
-      start: 'top top',
-      end: 'bottom top',
-      scrub: 1
-    }
-  })
-
-  tl.to('h1', {
-    opacity: 0,
-    duration: 1,
-    ease: 'power2.out'
-  })
-
-  tl.to('.bg-green-500', {
-    backgroundColor: 'blue',
-    duration: 1,
-    ease: 'power2.out'
-  })
-
-</script>

@@ -1,21 +1,272 @@
 ---
-import Header from '../components/base/Header.astro';
-import Footer from '../components/base/Footer.astro';
+import Header from "../components/base/Header.astro";
+import Footer from "../components/base/Footer.astro";
 import "../styles/global.css";
+export interface Props {
+  title: string;
+  description?: string;
+}
+const {
+  title,
+  description = "Tecnotix Solutions - Servicios tecnológicos integrales para empresas y hogares",
+} = Astro.props;
 ---
+
 <!doctype html>
-<html lang="en">
-	<head>
-		<meta charset="UTF-8" />
-		<meta name="viewport" content="width=device-width" />
-		<link rel="icon" type="image/svg+xml" href="/Favicon-Transparent.ico" />
-		<meta name="generator" content={Astro.generator} />
-		<title>{Astro.props.title}</title>
-	</head>
-	<body>
-		<Header />
-		<slot />
-		<Footer />
-	</body>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width" />
+    <meta name="description" content={description} />
+    <link rel="icon" type="image/svg+xml" href="/Favicon-Transparent.ico" />
+    <meta name="generator" content={Astro.generator} />
+    <title>{Astro.props.title}</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body class="font-sans">
+    <slot />
+    <script>
+      import { gsap } from "gsap";
+      import { ScrollTrigger } from "gsap/ScrollTrigger";
+
+      gsap.registerPlugin(ScrollTrigger);
+
+      // Wait for DOM to be ready
+      document.addEventListener("DOMContentLoaded", function () {
+        // Hero animations - two column layout
+        const heroTl = gsap.timeline();
+
+        heroTl
+          .fromTo(
+            ".hero-content",
+            { opacity: 0, x: -50 },
+            { opacity: 1, x: 0, duration: 1.2, ease: "power3.out" }
+          )
+          .fromTo(
+            ".hero-image",
+            { opacity: 0, x: 50 },
+            { opacity: 1, x: 0, duration: 1.2, ease: "power3.out" },
+            "-=0.8"
+          );
+
+        // Device animations in hero
+        gsap.fromTo(
+          ".floating-device",
+          { opacity: 0, y: 30, scale: 0.8 },
+          {
+            opacity: 1,
+            y: 0,
+            scale: 1,
+            duration: 1.5,
+            stagger: 0.2,
+            ease: "back.out(1.7)",
+            delay: 0.5,
+          }
+        );
+
+        // Tech assembly animation
+        gsap.fromTo(
+          ".tech-assembly g",
+          { opacity: 0, scale: 0.8, rotation: -10 },
+          {
+            opacity: 0.1,
+            scale: 1,
+            rotation: 0,
+            duration: 2,
+            stagger: 0.3,
+            ease: "power2.out",
+            delay: 1,
+          }
+        );
+
+        // Featured service cards animation - improved
+        gsap.fromTo(
+          ".featured-service-container",
+          { opacity: 0, y: 80 },
+          {
+            opacity: 1,
+            y: 0,
+            duration: 1.2,
+            stagger: 0.3,
+            ease: "power3.out",
+            scrollTrigger: {
+              trigger: ".featured-services",
+              start: "top 80%",
+              toggleActions: "play none none reverse",
+            },
+          }
+        );
+
+        // Other service cards animation
+        gsap.fromTo(
+          ".other-service-card",
+          { opacity: 0, y: 40, scale: 0.95 },
+          {
+            opacity: 1,
+            y: 0,
+            scale: 1,
+            duration: 0.8,
+            stagger: 0.1,
+            ease: "power2.out",
+            scrollTrigger: {
+              trigger: ".other-services",
+              start: "top 85%",
+              toggleActions: "play none none reverse",
+            },
+          }
+        );
+
+        // Section fade animations
+        gsap.fromTo(
+          ".section-fade",
+          { opacity: 0, y: 30 },
+          {
+            opacity: 1,
+            y: 0,
+            duration: 1,
+            ease: "power2.out",
+            scrollTrigger: {
+              trigger: ".section-fade",
+              start: "top 85%",
+              toggleActions: "play none none reverse",
+            },
+          }
+        );
+
+        // Parallax effect for service images
+        gsap.utils.toArray(".service-image").forEach((image) => {
+          const bg = image.dataset.bg;
+          if (bg) {
+            image.style.backgroundImage = `url(${bg})`;
+          }
+
+          // Only apply parallax to images with parallax class
+          if (image.classList.contains("parallax-image")) {
+            gsap.fromTo(
+              image,
+              { yPercent: -20 },
+              {
+                yPercent: 20,
+                ease: "none",
+                scrollTrigger: {
+                  trigger: image,
+                  start: "top bottom",
+                  end: "bottom top",
+                  scrub: 1,
+                },
+              }
+            );
+          }
+        });
+
+        // Counter animation for stats
+        gsap.utils.toArray(".stat-number[data-target]").forEach((counter) => {
+          const target = parseInt(counter.dataset.target);
+
+          ScrollTrigger.create({
+            trigger: counter,
+            start: "top 80%",
+            onEnter: () => {
+              gsap.fromTo(
+                counter,
+                { textContent: 0 },
+                {
+                  textContent: target,
+                  duration: 2,
+                  ease: "power2.out",
+                  snap: { textContent: 1 },
+                  onUpdate: function () {
+                    counter.textContent = Math.ceil(counter.textContent);
+                  },
+                }
+              );
+            },
+          });
+        });
+
+        // Smooth scroll for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
+          anchor.addEventListener("click", function (e) {
+            e.preventDefault();
+            const target = document.querySelector(this.getAttribute("href"));
+            if (target) {
+              gsap.to(window, {
+                duration: 1,
+                scrollTo: {
+                  y: target,
+                  offsetY: 80,
+                },
+                ease: "power2.inOut",
+              });
+            }
+          });
+        });
+
+        // Enhanced floating animations
+        gsap.to(".floating-circle", {
+          y: -20,
+          duration: 3,
+          ease: "power1.inOut",
+          stagger: 0.5,
+          repeat: -1,
+          yoyo: true,
+        });
+      });
+    </script>
+  </body>
 </html>
 
+<style is:global>
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    margin: 0;
+    line-height: 1.6;
+    background: #ffffff;
+  }
+
+  * {
+    box-sizing: border-box;
+  }
+
+  /* Custom scrollbar */
+  ::-webkit-scrollbar {
+    width: 8px;
+  }
+
+  ::-webkit-scrollbar-track {
+    background: #f1f1f1;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background: linear-gradient(135deg, #25a1b0, #34b4c3);
+    border-radius: 4px;
+  }
+
+  ::-webkit-scrollbar-thumb:hover {
+    background: linear-gradient(135deg, #1a7a86, #25a1b0);
+  }
+
+  /* Selection color */
+  ::selection {
+    background: rgba(37, 161, 176, 0.2);
+    color: #1a7a86;
+  }
+
+  /* Focus styles */
+  button:focus,
+  a:focus,
+  input:focus,
+  textarea:focus,
+  select:focus {
+    outline: 2px solid #25a1b0;
+    outline-offset: 2px;
+  }
+</style>
