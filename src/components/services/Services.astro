@@ -4,24 +4,21 @@ const featuredServices = [
     title: "Reparación de Dispositivos",
     description: "Servicio técnico especializado para notebooks, tablets y smartphones. Diagnóstico avanzado, reparaciones precisas y repuestos de calidad garantizada.",
     icon: "repair",
-    image: "https://images.pexels.com/photos/4792728/pexels-photo-4792728.jpeg?auto=compress&cs=tinysrgb&w=800",
-    priority: "🥇",
-    hasParallax: true
+    image: "https://images.pexels.com/photos/31884550/pexels-photo-31884550.jpeg",
+    hasParallax: false
   },
   {
     title: "Cámaras de Seguridad",
-    description: "Sistemas CCTV inteligentes con tecnología de última generación. Instalación profesional, monitoreo remoto y análisis de video avanzado.",
+    description: "Realizamos instalación de cámaras de seguridad con tecnología de última generación. Instalación profesional, monitoreo remoto",
     icon: "security",
     image: "https://images.pexels.com/photos/430208/pexels-photo-430208.jpeg?auto=compress&cs=tinysrgb&w=800",
-    priority: "🥈",
     hasParallax: false
   },
   {
     title: "Desarrollo Web",
-    description: "Sitios web modernos y aplicaciones personalizadas. Diseño responsive, optimización SEO y experiencias digitales que convierten visitantes en clientes.",
+    description: "Desarrollamos sitios web modernos, E-Commerce y aplicaciones personalizadas. Diseño responsive, optimización SEO y experiencias digitales que convierten visitantes en clientes.",
     icon: "web",
     image: "https://images.pexels.com/photos/196644/pexels-photo-196644.jpeg?auto=compress&cs=tinysrgb&w=800",
-    priority: "🥉",
     hasParallax: false
   }
 ];
@@ -38,26 +35,20 @@ const otherServices = [
     icon: "🛠️"
   },
   {
-    title: "Consultoría Informática",
-    description: "Programación a medida y automatización de procesos empresariales.",
-    icon: "💡"
-  },
-  {
-    title: "Equipos y Periféricos",
-    description: "Reparación e instalación de impresoras, routers y monitores.",
-    icon: "🖨️"
-  },
-  {
-    title: "Servicios de Impresión",
-    description: "Impresión, escaneo y copias con calidad profesional.",
-    icon: "📄"
+    title: "Y mucho más...",
+    description: "Consultoria Informática, impresión de fotos, impresión de documentos, impresiones en 3D, plastificado, etc...",
+    icon: "🧑‍💻"
   }
 ];
 ---
 
-<section id="servicios" class="py-20 bg-gradient-to-b from-gray-50 to-white relative overflow-hidden">
+<section id="servicios" class="services-section py-20 bg-white relative overflow-hidden">
+  <!-- Fondo con patrón sutil -->
+  <div class="absolute inset-0 bg-grid-pattern opacity-10"></div>
+  <!-- Gradiente de transición -->
+  <div class="services-transition"></div>
   <!-- Background Pattern -->
-  <div class="absolute inset-0 opacity-5">
+  <div class="absolute inset-0 opacity-10">
     <svg width="100%" height="100%" xmlns="http://www.w3.org/2000/svg">
       <defs>
         <pattern id="grid" width="40" height="40" patternUnits="userSpaceOnUse">
@@ -75,7 +66,7 @@ const otherServices = [
         Servicios <span class="text-primary">Destacados</span>
       </h2>
       <p class="text-xl text-gray-600 leading-relaxed">
-        Soluciones tecnológicas integrales diseñadas para impulsar tu negocio hacia el futuro digital
+        Soluciones tecnológicas integrales diseñadas para impulsar tu hogar y negocio.
       </p>
     </div>
     
@@ -84,10 +75,41 @@ const otherServices = [
       {featuredServices.map((service, index) => (
         <div class="featured-service-container">
           <div class={`featured-service-card shadow-box ${index % 2 === 0 ? 'lg:flex-row' : 'lg:flex-row-reverse'}`}>
-            <!-- Content -->
-            <div class="service-content flex-1">
+            <!-- Imagen para índices pares (izquierda) -->
+            {index % 2 === 0 && (
+              <div class="service-image-container flex-1">
+                <div class="service-image" style={`background-image: url('${service.image}')`}>
+                  <div class="image-overlay">
+                    <div class="floating-device">
+                      {service.icon === 'repair' && (
+                        <svg class="device-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                          <rect x="2" y="3" width="20" height="14" rx="2" ry="2"/>
+                          <line x1="8" y1="21" x2="16" y2="21"/>
+                          <line x1="12" y1="17" x2="12" y2="21"/>
+                        </svg>
+                      )}
+                      {service.icon === 'security' && (
+                        <svg class="device-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                          <path d="M2.062 12.348a1 1 0 0 1 0-.696 10.75 10.75 0 0 1 19.876 0 1 1 0 0 1 0 .696 10.75 10.75 0 0 1-19.876 0"/>
+                          <circle cx="12" cy="12" r="3"/>
+                        </svg>
+                      )}
+                      {service.icon === 'web' && (
+                        <svg class="device-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                          <circle cx="12" cy="12" r="10"/>
+                          <line x1="2" y1="12" x2="22" y2="12"/>
+                          <path d="m12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/>
+                        </svg>
+                      )}
+                    </div>
+                  </div>
+                </div>
+              </div>
+            )}
+            
+            <!-- Contenido del servicio -->
+            <div class="service-content flex-1 p-8">
               <div class="flex items-center mb-6">
-                <div class="priority-badge">{service.priority}</div>
                 <h3 class="service-title">{service.title}</h3>
               </div>
               <p class="service-description">{service.description}</p>
@@ -96,19 +118,19 @@ const otherServices = [
                   <svg class="feature-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
                   </svg>
-                  <span>Garantía extendida</span>
+                  <span>Trabajos con garantía incluida</span>
                 </div>
                 <div class="feature-item">
                   <svg class="feature-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
                   </svg>
-                  <span>Servicio 24/7</span>
+                  <span>Soporte técnico especializado</span>
                 </div>
                 <div class="feature-item">
                   <svg class="feature-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
                   </svg>
-                  <span>Calidad certificada</span>
+                  <span>Precios competitivos</span>
                 </div>
               </div>
               <a href="#contacto" class="service-cta">
@@ -119,35 +141,37 @@ const otherServices = [
               </a>
             </div>
             
-            <!-- Image -->
-            <div class="service-image-container flex-1">
-              <div class={`service-image ${service.hasParallax ? 'parallax-image' : ''}`} data-bg={service.image}>
-                <div class="image-overlay">
-                  <div class="floating-device">
-                    {service.icon === 'repair' && (
-                      <svg class="device-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor">
-                        <rect x="2" y="3" width="20" height="14" rx="2" ry="2"/>
-                        <line x1="8" y1="21" x2="16" y2="21"/>
-                        <line x1="12" y1="17" x2="12" y2="21"/>
-                      </svg>
-                    )}
-                    {service.icon === 'security' && (
-                      <svg class="device-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor">
-                        <path d="M2.062 12.348a1 1 0 0 1 0-.696 10.75 10.75 0 0 1 19.876 0 1 1 0 0 1 0 .696 10.75 10.75 0 0 1-19.876 0"/>
-                        <circle cx="12" cy="12" r="3"/>
-                      </svg>
-                    )}
-                    {service.icon === 'web' && (
-                      <svg class="device-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor">
-                        <circle cx="12" cy="12" r="10"/>
-                        <line x1="2" y1="12" x2="22" y2="12"/>
-                        <path d="m12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/>
-                      </svg>
-                    )}
+            <!-- Imagen para índices impares (derecha) -->
+            {index % 2 === 1 && (
+              <div class="service-image-container flex-1">
+                <div class="service-image" style={`background-image: url('${service.image}')`}>
+                  <div class="image-overlay">
+                    <div class="floating-device">
+                      {service.icon === 'repair' && (
+                        <svg class="device-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                          <rect x="2" y="3" width="20" height="14" rx="2" ry="2"/>
+                          <line x1="8" y1="21" x2="16" y2="21"/>
+                          <line x1="12" y1="17" x2="12" y2="21"/>
+                        </svg>
+                      )}
+                      {service.icon === 'security' && (
+                        <svg class="device-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                          <path d="M2.062 12.348a1 1 0 0 1 0-.696 10.75 10.75 0 0 1 19.876 0 1 1 0 0 1 0 .696 10.75 10.75 0 0 1-19.876 0"/>
+                          <circle cx="12" cy="12" r="3"/>
+                        </svg>
+                      )}
+                      {service.icon === 'web' && (
+                        <svg class="device-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                          <circle cx="12" cy="12" r="10"/>
+                          <line x1="2" y1="12" x2="22" y2="12"/>
+                          <path d="m12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/>
+                        </svg>
+                      )}
+                    </div>
                   </div>
                 </div>
               </div>
-            </div>
+            )}
           </div>
         </div>
       ))}
@@ -187,14 +211,39 @@ const otherServices = [
 </section>
 
 <style>
+  /* Estilos para la transición */
+  .services-section {
+    position: relative;
+    background: linear-gradient(to bottom, #f8fafc, #ffffff);
+    padding-top: 6rem;
+    margin-top: -4rem;
+    border-top-left-radius: 3rem;
+    border-top-right-radius: 3rem;
+  }
+  
+  .services-transition {
+    position: absolute;
+    top: -100px;
+    left: 0;
+    right: 0;
+    height: 100px;
+    background: linear-gradient(
+      to bottom, 
+      rgba(0, 0, 0, 1) 0%,
+      rgba(0, 0, 0, 0.7) 50%,
+      rgba(255, 255, 255, 0) 100%
+    );
+    pointer-events: none;
+    z-index: 1;
+  }
+  
   .shadow-box {
     background: white;
-    border-radius: 2rem;
+    border-radius: 1.5rem;
     box-shadow: 
-      0 25px 50px rgba(0, 0, 0, 0.15),
-      0 10px 25px rgba(37, 161, 176, 0.1),
-      inset 0 1px 0 rgba(255, 255, 255, 0.8);
-    border: 1px solid rgba(37, 161, 176, 0.1);
+      0 15px 35px rgba(0, 0, 0, 0.05),
+      0 5px 15px rgba(37, 161, 176, 0.05);
+    border: 1px solid rgba(37, 161, 176, 0.08);
     transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
     position: relative;
     overflow: hidden;
@@ -209,7 +258,9 @@ const otherServices = [
     height: 4px;
     background: linear-gradient(90deg, #25A1B0, #34B4C3);
     transform: scaleX(0);
+    transform-origin: left;
     transition: transform 0.4s ease;
+    z-index: 2;
   }
   
   .shadow-box:hover::before {
@@ -217,11 +268,11 @@ const otherServices = [
   }
   
   .shadow-box:hover {
-    transform: translateY(-8px);
+    transform: translateY(-5px);
     box-shadow: 
-      0 35px 70px rgba(0, 0, 0, 0.2),
-      0 15px 35px rgba(37, 161, 176, 0.15),
-      inset 0 1px 0 rgba(255, 255, 255, 0.8);
+      0 20px 40px rgba(0, 0, 0, 0.1),
+      0 10px 20px rgba(37, 161, 176, 0.1);
+    border-color: rgba(37, 161, 176, 0.2);
   }
   
   .featured-service-container {
@@ -232,14 +283,17 @@ const otherServices = [
   .featured-service-card {
     display: flex;
     flex-direction: column;
-    gap: 3rem;
-    padding: 3rem;
+    gap: 2.5rem;
+    padding: 2.5rem;
     align-items: center;
+    height: 100%;
   }
   
   @media (min-width: 1024px) {
     .featured-service-card {
       flex-direction: row;
+      padding: 2.5rem;
+      gap: 3rem;
       align-items: stretch;
     }
   }
@@ -248,12 +302,15 @@ const otherServices = [
     display: flex;
     flex-direction: column;
     justify-content: center;
+    flex: 1 1 50%;
+    padding: 2rem;
+    width: 100%;
   }
   
-  .priority-badge {
-    font-size: 2rem;
-    margin-right: 1rem;
-    filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.1));
+  @media (min-width: 1024px) {
+    .service-content {
+      padding: 2rem;
+    }
   }
   
   .service-title {
@@ -313,23 +370,54 @@ const otherServices = [
   }
   
   .service-image-container {
-    min-height: 400px;
     position: relative;
-    border-radius: 1.5rem;
+    border-radius: 1rem;
     overflow: hidden;
+    height: 350px;
+    margin: 0 auto;
+    width: 100%;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
+    transition: all 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+    transform: translateZ(0);
+    will-change: transform;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  @media (min-width: 768px) {
+    .service-image-container {
+      height: 400px;
+    }
+  }
+  
+  @media (min-width: 1024px) {
+    .service-image-container {
+      height: 450px;
+      margin: 0;
+      width: 100%;
+    }
   }
   
   .service-image {
     width: 100%;
     height: 100%;
     background-size: cover;
-    background-position: center;
+    background-position: center center;
+    background-repeat: no-repeat;
     position: relative;
-    transition: transform 0.3s ease;
+    transition: transform 1s cubic-bezier(0.16, 1, 0.3, 1);
+    transform-origin: center;
+    object-fit: cover;
   }
   
-  .service-image:hover {
-    transform: scale(1.02);
+  /* Asegurar que la imagen ocupe todo el espacio disponible */
+  .featured-service-card > .service-image-container {
+    flex: 1 1 50%;
+  }
+  
+  .shadow-box:hover .service-image {
+    transform: scale(1.1);
   }
   
   .parallax-image {
@@ -344,11 +432,29 @@ const otherServices = [
   
   .image-overlay {
     position: absolute;
-    inset: 0;
-    background: linear-gradient(135deg, rgba(37, 161, 176, 0.8), rgba(52, 180, 195, 0.6));
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(
+      135deg,
+      rgba(37, 161, 176, 0.15) 0%,
+      rgba(0, 0, 0, 0.2) 100%
+    );
     display: flex;
     align-items: center;
     justify-content: center;
+    transition: all 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+    opacity: 0.8;
+  }
+  
+  .shadow-box:hover .image-overlay {
+    opacity: 1;
+    background: linear-gradient(
+      135deg,
+      rgba(37, 161, 176, 0.25) 0%,
+      rgba(0, 0, 0, 0.3) 100%
+    );
   }
   
   .floating-device {
@@ -356,11 +462,16 @@ const otherServices = [
   }
   
   .device-icon {
-    width: 4rem;
-    height: 4rem;
-    color: white;
+    width: 36px;
+    height: 36px;
+    color: #25A1B0;
     stroke-width: 1.5;
-    filter: drop-shadow(0 10px 20px rgba(0, 0, 0, 0.3));
+    transition: all 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+  
+  .shadow-box:hover .device-icon {
+    transform: scale(1.1);
+    color: #1a7a86;
   }
   
   @keyframes float-device {
@@ -444,4 +555,5 @@ const otherServices = [
       gap: 2rem;
     }
   }
+
 </style>

@@ -3,7 +3,8 @@
 ---
 
 <header
-  class="fixed w-full top-0 z-50 bg-black/95 backdrop-blur-sm border-b border-gray-800"
+  id="main-header"
+  class="fixed w-full top-0 z-50 bg-black/95 backdrop-blur-sm border-b border-gray-800 transition-all duration-300"
 >
   <nav class="container mx-auto px-4 sm:px-6 lg:px-8">
     <div class="flex justify-between items-center h-20">
@@ -101,33 +102,35 @@
     position: relative;
   }
 
-  .logo-container::before {
-    content: "";
-    position: absolute;
-    top: -2px;
-    left: -2px;
-    right: -2px;
-    bottom: -2px;
-    background: linear-gradient(45deg, #25a1b0, #34b4c3, #25a1b0);
-    border-radius: 50%;
-    opacity: 0;
-    transition: opacity 0.3s ease;
-    z-index: -1;
-    filter: blur(4px);
+  .logo-container svg {
+    will-change: transform;
   }
 
-  .logo-container:hover::before {
-    opacity: 0.6;
-    animation: glow-pulse 2s ease-in-out infinite alternate;
+  #logo-t {
+    fill: #ffffff;
   }
 
-  @keyframes glow-pulse {
-    from {
-      filter: blur(4px);
-    }
-    to {
-      filter: blur(8px);
-    }
+  #logo-polygon {
+    fill: #25a1b0;
+    transform-origin: 50% 50%;
+    transform-box: fill-box;
+    transition:
+      transform 1s ease-in-out,
+      fill 0.3s ease;
+  }
+
+  .logo-container:hover #logo-polygon {
+    transform: rotate(360deg);
+    fill: #ffffff;
+  }
+
+  .logo-container:hover #logo-t {
+    fill: #25a1b0;
+  }
+
+  /* Reset suave cuando termina la animación */
+  .logo-container:not(:hover) #logo-polygon {
+    transition: transform 0.6s cubic-bezier(0.25, 0.1, 0.25, 1);
   }
 
   .nav-link {
@@ -146,14 +149,18 @@
     left: 50%;
     width: 0;
     height: 2px;
-    background: linear-gradient(90deg, #25a1b0, #34b4c3);
+    background: linear-gradient(
+      90deg,
+      var(--color-primary),
+      var(--color-primary-light)
+    );
     transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     transform: translateX(-50%);
   }
 
   .nav-link:hover {
-    color: #25a1b0;
-    background: rgba(37, 161, 176, 0.1);
+    color: var(--color-primary);
+    background: rgba(var(--color-primary), 0.1);
   }
 
   .nav-link:hover::before {
@@ -162,20 +169,151 @@
 </style>
 
 <script>
-  document.addEventListener("DOMContentLoaded", function () {
+  // Importar GSAP
+  import gsap from "gsap";
+  import { ScrollTrigger } from "gsap/ScrollTrigger";
+
+  gsap.registerPlugin(ScrollTrigger);
+  document.addEventListener("DOMContentLoaded", () => {
     const mobileMenuButton = document.querySelector(".mobile-menu-button");
     const mobileMenu = document.querySelector(".mobile-menu");
+    const header = document.getElementById("main-header");
+    const logoContainer = document.querySelector(".logo-container");
+    const logoT = document.getElementById("logo-t");
+    const navLinks = document.querySelectorAll(".nav-link");
+    let isMenuOpen = false;
 
-    mobileMenuButton?.addEventListener("click", function () {
-      mobileMenu?.classList.toggle("hidden");
-    });
+    // Configuración de eventos de hover para el logo
+    if (logoContainer && logoT) {
+      logoContainer.addEventListener("mouseenter", () => {
+        // Cambio de color suave con GSAP
+        gsap.to(logoT, {
+          fill: "#25A1B0",
+          duration: 0.3,
+        });
+      });
 
-    // Close mobile menu when clicking on a link
-    const mobileLinks = document.querySelectorAll(".mobile-menu a");
-    mobileLinks.forEach((link) => {
-      link.addEventListener("click", function () {
-        mobileMenu?.classList.add("hidden");
+      logoContainer.addEventListener("mouseleave", () => {
+        // Restaurar colores al salir
+        gsap.to(logoT, {
+          fill: "#ffffff",
+          duration: 0.3,
+        });
+      });
+    }
+
+    // Animación de los enlaces de navegación
+    navLinks.forEach((link) => {
+      link.addEventListener("mouseenter", () => {
+        gsap.to(link, {
+          y: -2,
+          duration: 0.3,
+          ease: "power2.out",
+        });
+      });
+
+      link.addEventListener("mouseleave", () => {
+        gsap.to(link, {
+          y: 0,
+          duration: 0.3,
+          ease: "power2.out",
+        });
       });
     });
+
+    // Menú móvil
+    if (mobileMenuButton && mobileMenu) {
+      mobileMenuButton.addEventListener("click", () => {
+        isMenuOpen = !isMenuOpen;
+
+        if (isMenuOpen) {
+          gsap.to(mobileMenu, {
+            height: "auto",
+            opacity: 1,
+            duration: 0.3,
+            ease: "power2.inOut",
+            onStart: () => mobileMenu.classList.remove("hidden"),
+          });
+        } else {
+          gsap.to(mobileMenu, {
+            height: 0,
+            opacity: 0,
+            duration: 0.3,
+            ease: "power2.inOut",
+            onComplete: () => mobileMenu.classList.add("hidden"),
+          });
+        }
+      });
+    }
+
+    // Efecto de scroll con GSAP
+    if (header && logoContainer) {
+      let lastScrollY = window.scrollY;
+
+      // Configuración inicial
+      gsap.set(header, { y: 0 });
+
+      // Animación del scroll
+      window.addEventListener("scroll", () => {
+        const currentScroll = window.scrollY;
+
+        // Mostrar/ocultar header al hacer scroll
+        if (currentScroll > lastScrollY && currentScroll > 100) {
+          // Scroll hacia abajo
+          gsap.to(header, {
+            y: "-100%",
+            duration: 0.3,
+            ease: "power2.inOut",
+          });
+        } else if (currentScroll < lastScrollY) {
+          // Scroll hacia arriba
+          gsap.to(header, {
+            y: 0,
+            duration: 0.3,
+            ease: "power2.inOut",
+          });
+        }
+
+        // Reducir tamaño del header al hacer scroll
+        if (currentScroll > 50) {
+          gsap.to(header, {
+            paddingTop: "0.5rem",
+            paddingBottom: "0.5rem",
+            duration: 0.3,
+            ease: "power2.inOut",
+          });
+
+          gsap.to(logoContainer, {
+            scale: 0.8,
+            duration: 0.3,
+            ease: "power2.inOut",
+          });
+        } else {
+          gsap.to(header, {
+            paddingTop: "0",
+            paddingBottom: "0",
+            duration: 0.3,
+            ease: "power2.inOut",
+          });
+
+          gsap.to(logoContainer, {
+            scale: 1,
+            duration: 0.3,
+            ease: "power2.inOut",
+          });
+        }
+
+        lastScrollY = currentScroll;
+      });
+
+      // Asegurarse de que el header esté visible al hacer scroll al principio
+      window.addEventListener("scrollToTop", () => {
+        gsap.to(header, {
+          y: 0,
+          duration: 0.3,
+          ease: "power2.inOut",
+        });
+      });
+    }
   });
 </script>
