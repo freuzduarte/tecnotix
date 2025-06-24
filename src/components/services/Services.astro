@@ -42,7 +42,7 @@ const otherServices = [
 ];
 ---
 
-<section id="servicios" class="services-section py-20 bg-white relative overflow-hidden">
+<section id="services" class="services-section py-20 bg-white relative overflow-hidden">
   <!-- Fondo con patrón sutil -->
   <div class="absolute inset-0 bg-grid-pattern opacity-10"></div>
   <!-- Gradiente de transición -->
@@ -133,9 +133,14 @@ const otherServices = [
                   <span>Precios competitivos</span>
                 </div>
               </div>
-              <a href="#contacto" class="service-cta">
-                Solicitar Servicio
-                <svg class="ml-2 w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <a 
+                href={`https://wa.me/56948819109?text=${encodeURIComponent(`Hola, estoy interesado en el servicio de ${service.title}. ¿Podrían darme más información?`)}`} 
+                target="_blank"
+                rel="noopener noreferrer"
+                class="service-cta group"
+              >
+                <span>Consultar por WhatsApp</span>
+                <svg class="ml-2 w-5 h-5 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3" />
                 </svg>
               </a>
@@ -197,12 +202,17 @@ const otherServices = [
             </div>
             <h4 class="service-card-title">{service.title}</h4>
             <p class="service-card-description">{service.description}</p>
-            <a href="#contacto" class="service-card-link">
-              Consultar
-              <svg class="ml-1 w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            {/* <a 
+              href={`https://wa.me/56948819109?text=${encodeURIComponent(`Hola, me interesa el servicio de ${service.title}. ¿Podrían darme más información?`)}`}
+              target="_blank"
+              rel="noopener noreferrer"
+              class="service-card-link group"
+            >
+              Consultar por WhatsApp
+              <svg class="ml-1 w-4 h-4 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
               </svg>
-            </a>
+            </a> */}
           </div>
         ))}
       </div>

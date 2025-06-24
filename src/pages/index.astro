@@ -1,9 +1,20 @@
 ---
-import BaseLayout from '../layouts/BaseLayout.astro';
-import Construction from '../components/Construction.astro';
-import "../styles/global.css";
+import Layout from "../layouts/Layout.astro";
+
+import Hero from "../components/Hero.astro";
+
+import About from "../components/About.astro";
+import Contact from "../components/Contact.astro";
+import Header from "../components/base/Header.astro";
+import Services from "../components/services/Services.astro";
+import Footer from "../components/base/Footer.astro";
 ---
 
-<BaseLayout>
-	<Construction />
-</BaseLayout>
+<Layout title="Tecnotix Solutions - Servicios Tecnológicos Integrales">
+  <Header />
+  <Hero />
+  <Services />
+  <About />
+  <Contact />
+  <Footer />
+</Layout>
