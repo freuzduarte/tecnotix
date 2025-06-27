@@ -8,6 +8,29 @@ define('SITE_ROOT', dirname(__DIR__));
 // Cargar la configuración
 $config = require_once SITE_ROOT . '/config.php';
 
+// --- Medidas Anti-Spam y Seguridad Adicionales ---
+
+// 1. Límite de Envíos (Rate Limiting)
+if ($config['SECURITY']['RATE_LIMIT']['ENABLED']) {
+    $limitConfig = $config['SECURITY']['RATE_LIMIT'];
+    $currentTime = time();
+    
+    // Limpiar timestamps antiguos
+    if (isset($_SESSION['form_submissions'])) {
+        $_SESSION['form_submissions'] = array_filter($_SESSION['form_submissions'], function($timestamp) use ($currentTime, $limitConfig) {
+            return ($currentTime - $timestamp) < $limitConfig['TIME_WINDOW'];
+        });
+    }
+
+    // Comprobar si se ha excedido el límite
+    if (isset($_SESSION['form_submissions']) && count($_SESSION['form_submissions']) >= $limitConfig['ATTEMPTS']) {
+        http_response_code(429); // Too Many Requests
+        echo json_encode(['status' => 'error', 'message' => 'Has enviado demasiados mensajes. Inténtalo de nuevo más tarde.']);
+        exit;
+    }
+}
+
+
 // Cargar PHPMailer
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\Exception;
@@ -60,6 +83,15 @@ $email = trim($input['email'] ?? '');
 $telefono = trim($input['telefono'] ?? '');
 $asunto = trim($input['asunto'] ?? 'Sin asunto');
 $mensaje = trim($input['mensaje'] ?? '');
+$honeypot = $input['website'] ?? ''; // Campo trampa para bots
+
+// 2. Comprobación del Honeypot
+if (!empty($honeypot)) {
+    // Es un bot. Finge éxito pero no envíes nada.
+    echo json_encode(['status' => 'success', 'message' => '¡Mensaje enviado con éxito!']);
+    exit;
+}
+
 
 // --- Validación de Datos ---
 $errors = [];
@@ -67,6 +99,14 @@ if (empty($nombre)) $errors[] = 'El nombre es obligatorio.';
 if (!filter_var($email, FILTER_VALIDATE_EMAIL)) $errors[] = 'El email no es válido.';
 if (empty($telefono)) $errors[] = 'El teléfono es obligatorio.';
 if (empty($mensaje)) $errors[] = 'El mensaje es obligatorio.';
+
+// 3. Validación de longitud
+foreach ($config['FORM']['MAX_LENGTH'] as $field => $length) {
+    if (isset($input[$field]) && mb_strlen($input[$field]) > $length) {
+        $errors[] = "El campo '$field' no puede tener más de $length caracteres.";
+    }
+}
+
 
 if (!empty($errors)) {
     http_response_code(400);
@@ -108,6 +148,12 @@ try {
     $mail->AltBody = "Mensaje de: " . htmlspecialchars($nombre) . " (" . htmlspecialchars($email) . ")\n\n" . htmlspecialchars($mensaje);
 
     $mail->send();
+
+    // Registrar el envío para el rate limiting
+    if ($config['SECURITY']['RATE_LIMIT']['ENABLED']) {
+        $_SESSION['form_submissions'][] = time();
+    }
+
     echo json_encode(['status' => 'success', 'message' => '¡Mensaje enviado con éxito!']);
 
 } catch (Exception $e) {
