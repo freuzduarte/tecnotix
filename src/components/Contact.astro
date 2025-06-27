@@ -16,7 +16,7 @@
 
       <div class="grid grid-cols-1 lg:grid-cols-2 gap-12">
         <!-- Contact Form -->
-        <!-- <div class="section-fade">
+        <div class="section-fade">
           <div class="bg-white rounded-2xl p-8 shadow-lg">
             <h3 class="text-2xl font-semibold text-secondary mb-6">
               Envíanos un Mensaje
@@ -32,7 +32,7 @@
                   <input
                     type="text"
                     id="name"
-                    name="name"
+                    name="nombre"
                     required
                     class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent transition-colors duration-300"
                   />
@@ -61,19 +61,20 @@
                 <input
                   type="tel"
                   id="phone"
-                  name="phone"
+                  name="telefono"
+                  required
                   class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent transition-colors duration-300"
                 />
               </div>
               <div>
                 <label
-                  for="service"
+                  for="asunto"
                   class="block text-sm font-medium text-secondary mb-2"
-                  >Servicio de Interés</label
+                  >Asunto</label
                 >
                 <select
-                  id="service"
-                  name="service"
+                  id="asunto"
+                  name="asunto"
                   class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent transition-colors duration-300"
                 >
                   <option value="">Selecciona un servicio</option>
@@ -95,7 +96,7 @@
                 >
                 <textarea
                   id="message"
-                  name="message"
+                  name="mensaje"
                   rows="4"
                   required
                   class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent transition-colors duration-300"
@@ -110,7 +111,7 @@
               </button>
             </form>
           </div>
-        </div> -->
+        </div>
 
         <!-- Contact Information -->
         <div class="section-fade">
@@ -323,7 +324,7 @@
           ])
         );
 
-        const response = await fetch("/php/contact.php", {
+        const response = await fetch("/php/handler.php", {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
@@ -333,7 +334,7 @@
 
         const result = await response.json();
 
-        if (result.success) {
+        if (result.status === 'success') {
           // Mostrar mensaje de éxito
           showNotification("¡Mensaje enviado con éxito!", "success");
           form.reset();
