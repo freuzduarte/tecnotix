@@ -16,7 +16,7 @@
 
       <div class="grid grid-cols-1 lg:grid-cols-2 gap-12">
         <!-- Contact Form -->
-        <div class="section-fade">
+        <!-- <div class="section-fade">
           <div class="bg-white rounded-2xl p-8 shadow-lg">
             <h3 class="text-2xl font-semibold text-secondary mb-6">
               Envíanos un Mensaje
@@ -110,7 +110,7 @@
               </button>
             </form>
           </div>
-        </div>
+        </div> -->
 
         <!-- Contact Information -->
         <div class="section-fade">
@@ -326,9 +326,9 @@
         const response = await fetch("/php/contact.php", {
           method: "POST",
           headers: {
-            "Content-Type": "application/x-www-form-urlencoded",
+            "Content-Type": "application/json",
           },
-          body: new URLSearchParams(formDataObj).toString(),
+          body: JSON.stringify(formDataObj),
         });
 
         const result = await response.json();
@@ -360,7 +360,7 @@
       }
     });
 
-    function showNotification(message, type = "success") {
+    function showNotification(message: string, type: string = "success") {
       // Crear notificación
       const notification = document.createElement("div");
       notification.className = `fixed top-4 right-4 px-6 py-4 rounded-lg shadow-lg z-50 transform transition-all duration-300 ${
