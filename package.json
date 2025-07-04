@@ -2,6 +2,10 @@
   "name": "tecnotix",
   "type": "module",
   "version": "0.0.1",
+  "author": {
+    "name": "Alfredo Uzcategui",
+    "email": "alfredo.uzcategui@tecnotix.cl"
+  },
   "scripts": {
     "dev": "astro dev",
     "build": "astro build",
