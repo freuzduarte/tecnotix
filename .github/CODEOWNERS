@@ -1,0 +1,4 @@
+# CODEOWNERS - Define quién debe revisar cambios en diferentes partes del código
+
+# Owner global - todos los archivos requieren revisión de esta persona
+* @freuzduarte
