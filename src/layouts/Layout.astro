@@ -32,6 +32,15 @@ const jsonLd = {
 <!doctype html>
 <html lang="es">
   <head>
+    <!-- Google tag (gtag.js) ANALYTICS  -->
+    <script is:inline type="text/partytown" async src="https://www.googletagmanager.com/gtag/js?id=G-T7SV4CRBYX"></script>
+    <script is:inline type="text/partytown">
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'G-T7SV4CRBYX');
+    </script>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width" />
     <meta name="description" content={description} />
@@ -67,14 +76,6 @@ const jsonLd = {
     <meta name="author" content="Tecnotix Solutions" />
     <!-- SEO: Datos estructurados JSON-LD para empresa local -->
     <script type="application/ld+json" set:html={JSON.stringify(jsonLd)}></script>
-    <script is:inline type="text/partytown" async src="https://www.googletagmanager.com/gtag/js?id=G-T7SV4CRBYX"></script>
-    <script is:inline type="text/partytown">
-      window.dataLayer = window.dataLayer || [];
-      function gtag(){dataLayer.push(arguments);}
-      gtag('js', new Date());
-
-      gtag('config', 'G-T7SV4CRBYX');
-    </script>
   </head>
   <body class="font-sans">
     <slot />
