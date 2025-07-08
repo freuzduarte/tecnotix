@@ -1,3 +1,10 @@
 User-agent: *
-Disallow:
-Sitemap: https://tecnotix.cl/sitemap.xml
+Allow: /
+
+# Sitemap
+Sitemap: https://tecnotix.cl/sitemap-index.xml
+
+# Directivas de rastreo
+Disallow: /admin/
+Disallow: /api/
+Disallow: /private/
