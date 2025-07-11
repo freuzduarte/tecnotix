@@ -6,7 +6,7 @@ export interface Props {
 }
 const {
   title,
-  description = "Tecnotix Solutions - Servicios tecnológicos integrales para empresas y hogares",
+  description = "Tecnotix Solutions - Servicios tecnológicos integrales para empresas y hogares en Santiago, Las Condes.",
 } = Astro.props;
 
 // JSON-LD para empresa local
@@ -19,7 +19,11 @@ const jsonLd = {
   description,
   address: {
     '@type': 'PostalAddress',
-    addressCountry: 'CL',
+    streetAddress: 'Nueva Las Condes 12251', // (Ejemplo, reemplaza con tu dirección real o genérica)
+    addressLocality: 'Las Condes',
+    addressRegion: 'Región Metropolitana',
+    postalCode: '7590956', // Opcional pero recomendado
+    addressCountry: 'CL'
   },
   contactPoint: [{
     '@type': 'ContactPoint',
