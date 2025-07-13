@@ -4,7 +4,20 @@ Allow: /
 # Sitemap
 Sitemap: https://tecnotix.cl/sitemap-index.xml
 
-# Directivas de rastreo
+# Directivas de rastreo - Proteger archivos sensibles
 Disallow: /admin/
 Disallow: /api/
 Disallow: /private/
+Disallow: /php/
+Disallow: /vendor/
+Disallow: /node_modules/
+Disallow: /.git/
+Disallow: /config.php
+Disallow: /*.php$
+Disallow: /test-phpmailer.php
+Disallow: /handler.php
+
+# Permitir archivos importantes
+Allow: /sitemap-index.xml
+Allow: /robots.txt
+Allow: /favicon.ico

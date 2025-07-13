@@ -44,18 +44,23 @@ require_once $phpMailerSrcPath . 'SMTP.php';
 
 // --- Verificación de Seguridad ---
 
-// 1. Verificar el Origen (CORS)
-if (isset($_SERVER['HTTP_ORIGIN'])) {
-    if (!in_array($_SERVER['HTTP_ORIGIN'], $config['SECURITY']['ALLOWED_ORIGINS'])) {
+// 1. Verificar el Origen (CORS) - Mejorado para Google Analytics
+$allowedOrigins = $config['SECURITY']['ALLOWED_ORIGINS'];
+$origin = $_SERVER['HTTP_ORIGIN'] ?? '';
+
+if ($origin) {
+    if (in_array($origin, $allowedOrigins)) {
+        header('Access-Control-Allow-Origin: ' . $origin);
+    } else {
+        // Log the blocked origin for debugging
+        error_log('Blocked origin: ' . $origin);
         http_response_code(403);
         echo json_encode(['status' => 'error', 'message' => 'Origen no permitido.']);
         exit;
     }
-    header('Access-Control-Allow-Origin: ' . $_SERVER['HTTP_ORIGIN']);
 } else {
-    http_response_code(403);
-    echo json_encode(['status' => 'error', 'message' => 'Acceso prohibido.']);
-    exit;
+    // Allow requests without origin (like from Google Analytics)
+    header('Access-Control-Allow-Origin: *');
 }
 
 header('Content-Type: application/json');

@@ -244,6 +244,7 @@
                   rel="noopener noreferrer"
                   class="w-12 h-12 bg-primary/10 rounded-lg flex items-center justify-center hover:bg-primary hover:text-white transition-all duration-300"
                   aria-label="Instagram de Tecnotix Solutions"
+                  onclick="if(typeof gtag !== 'undefined') gtag('event', 'social_click', {event_category: 'engagement', event_label: 'instagram'});"
                 >
                   <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
                     <path
@@ -259,6 +260,7 @@
                   rel="noopener noreferrer"
                   class="w-12 h-12 bg-primary/10 rounded-lg flex items-center justify-center hover:bg-primary hover:text-white transition-all duration-300"
                   aria-label="LinkedIn de Tecnotix Solutions"
+                  onclick="if(typeof gtag !== 'undefined') gtag('event', 'social_click', {event_category: 'engagement', event_label: 'linkedin'});"
                 >
                   <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
                     <path
@@ -274,6 +276,7 @@
                   rel="noopener noreferrer"
                   class="w-12 h-12 bg-primary/10 rounded-lg flex items-center justify-center hover:bg-primary hover:text-white transition-all duration-300"
                   aria-label="WhatsApp de Tecnotix Solutions"
+                  onclick="if(typeof gtag !== 'undefined') gtag('event', 'social_click', {event_category: 'engagement', event_label: 'whatsapp'});"
                 >
                   <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 50 50">
                     <path
@@ -329,6 +332,25 @@
           ])
         );
 
+        // Track form submission attempt
+        if (typeof window !== 'undefined' && (window as any).gtag) {
+          (window as any).gtag('event', 'form_submit', {
+            event_category: 'engagement',
+            event_label: 'contact_form'
+          });
+        }
+        
+        // Track specific service if selected
+        const selectedService = formDataObj.asunto;
+        if (selectedService && selectedService !== '') {
+          if (typeof window !== 'undefined' && (window as any).gtag) {
+            (window as any).gtag('event', 'service_inquiry', {
+              event_category: 'engagement',
+              event_label: selectedService
+            });
+          }
+        }
+
         const response = await fetch("/php/handler.php", {
           method: "POST",
           headers: {
@@ -340,10 +362,26 @@
         const result = await response.json();
 
         if (result.status === 'success') {
+          // Track successful submission
+          if (typeof window !== 'undefined' && (window as any).gtag) {
+            (window as any).gtag('event', 'form_success', {
+              event_category: 'conversion',
+              event_label: 'contact_form'
+            });
+          }
+          
           // Mostrar mensaje de éxito
           showNotification("¡Mensaje enviado con éxito!", "success");
           form.reset();
         } else {
+          // Track failed submission
+          if (typeof window !== 'undefined' && (window as any).gtag) {
+            (window as any).gtag('event', 'form_error', {
+              event_category: 'engagement',
+              event_label: 'contact_form_error'
+            });
+          }
+          
           // Mostrar mensaje de error
           showNotification(
             result.message ||
@@ -353,6 +391,15 @@
         }
       } catch (error) {
         console.error("Error:", error);
+        
+        // Track connection error
+        if (typeof window !== 'undefined' && (window as any).gtag) {
+          (window as any).gtag('event', 'form_error', {
+            event_category: 'engagement',
+            event_label: 'connection_error'
+          });
+        }
+        
         showNotification(
           "Error al conectar con el servidor. Por favor, inténtalo de nuevo más tarde.",
           "error"
